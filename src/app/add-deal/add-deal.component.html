@@ -1,0 +1,73 @@
+<mat-card>    
+    <!-- Title of an Card -->    
+    <mat-card-title>    
+             
+        Uzupełnij poniższe pola aby dodać nową okazję  
+    </mat-card-title>    
+    
+    <mat-card-content>    
+            <div *ngIf="vis">
+            <img [src]="imgurl" height="60" > <br/>  
+        </div>
+        <form (submit)="addDeal()">    
+            <table>    
+                <tr>    
+                       
+                        <mat-form-field class="demo-full-width" >    
+                            <input matInput placeholder='Nazwa okazji' maxlength="100" [(ngModel)]="model.name" name="dealName">                               
+                        </mat-form-field>    
+                      </tr>
+                      <tr>   
+                    <td>    
+                        <mat-form-field class="demo-full-width">    
+                            <textarea matInput placeholder="Opis okazji" matTextareaAutosize matAutosizeMinRows="6" matAutosizeMaxRows="6" [(ngModel)]="model.description" name="dealDesc"></textarea> 
+                        </mat-form-field>    
+                    </td>    
+                </tr>    
+                <tr>    
+                    <td>    
+                        <mat-form-field class="demo-full-width">    
+                            <input matInput placeholder="Link" [(ngModel)]="model.link" name="dealLink"> 
+                        </mat-form-field>    
+                    </td>    
+                </tr>    
+                <tr>    
+                    <td>    
+                        <mat-form-field class="demo-full-width">    
+                            <input matInput placeholder="Cena" [(ngModel)]="model.price" name="dealPrice"> 
+                        </mat-form-field>    
+                    </td>    
+                </tr>    
+                <tr>                        
+                    <td ><br>    
+                        <mat-form-field>    
+                            <mat-select placeholder="Wybierz kategorie" [(value)]="model.categoryID" name="dealCategory" >                                   
+                                    <mat-option *ngFor="let category of categories" value={{category.category_id}}  >{{category.category_name}}</mat-option>                        
+                            </mat-select>    
+                            
+                            
+  
+                        </mat-form-field>    
+                        <form>
+                        <input id="image" name="image" type="file" (change)="onFileSelected($event)"  color="accent" accept=".png" >   
+                        <button type="reset" (click)="deleteImg()">Usuń obrazek</button>
+                        <br/>  <br/>  
+                        </form>
+
+                                              
+                    </td>    
+                                     
+                </tr>                   
+                
+                <tr>    
+                    <td class="content-center">    
+                        <button type="submit" mat-raised-button color="accent">Dodaj</button>    
+                        <button type="reset" mat-raised-button color ="accent">Wyczyść</button>  
+                                                 
+                    </td>    
+                </tr>    
+            </table>    
+        </form>    
+    </mat-card-content>    
+</mat-card>   
+

@@ -1,0 +1,13 @@
+<div *ngFor="let deal of deals">
+<mat-card>
+<mat-card-title>{{deal.name}}</mat-card-title>
+<mat-card-subtitle>{{deal.price}}  </mat-card-subtitle>
+<mat-card-content>{{deal.description}}</mat-card-content>
+<mat-card-footer>Kategoria: {{deal.category.category_name}}
+    <br /><a href="//{{deal.link}}" target="_blank">Link do okazji</a>  
+
+</mat-card-footer>
+
+</mat-card>
+
+</div>
