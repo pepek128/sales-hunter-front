@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from '../category.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-add-deal',
@@ -8,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./add-deal.component.css']
 })
 export class AddDealComponent implements OnInit {
-  image: null;
+  image: File;
   categories : Array<any>;
   model : DealAddModel = {
   name:'',
@@ -21,9 +23,7 @@ export class AddDealComponent implements OnInit {
   public vis=false;
   imgurl:'';
 
-  constructor(private categoryService: CategoryService, private http: HttpClient) {
-
-   }
+  constructor(private categoryService: CategoryService, private http: HttpClient) { }
 
   ngOnInit() {
     this.categoryService.getAll().subscribe(data => {
@@ -32,12 +32,25 @@ export class AddDealComponent implements OnInit {
 
 
 }
-addDeal(): void{  
+addDeal(): void {  
   let url = "http://localhost:8080/deals";
-  let imgurl = "http://localhost:8080/uploadFile";
-  const uploadData = new FormData();
+  let imgl = 'http://localhost:8080/uploadFile';
+  var uploadData = new FormData();
   uploadData.append('image', this.image);
-  this.http.post(imgurl, uploadData);
+ 
+
+ 
+  const httpOptions = {
+    headers: new HttpHeaders({
+    'Content-Type':  'multipart/form-data'    
+   })
+};
+        this.http.post('http://localhost:8080/uploadFile', uploadData,httpOptions);
+
+ 
+
+  
+  
 
 this.http.post(url, this.model).subscribe(
   res =>{
@@ -47,21 +60,20 @@ this.http.post(url, this.model).subscribe(
     alert("Błąd dodawania okazji");  }
 )
 
+
 }
+
 onFileSelected(event){
-  this.vis=true;
-  if (event.target.files && event.target.files[0]) {
-    var reader = new FileReader();
+  this.image=event.target.files[0];
+  this.vis=true;  
+  var reader = new FileReader();
 
-    reader.readAsDataURL(event.target.files[0]); // read file as data url
-    this.image=event.target.files[0];
-    reader.onload = (event:any) => { // called once readAsDataURL is completed
-      this.imgurl = event.target.result;
-     
+  reader.readAsDataURL(event.target.files[0]); // read file as data url
+ 
+  reader.onload = (event:any) => { // called once readAsDataURL is completed
+  this.imgurl = event.target.result;}
 }
 
-}
-}
 deleteImg(){
 this.vis=false;
 this.imgurl='';

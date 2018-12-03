@@ -2,7 +2,7 @@
     <!-- Title of an Card -->    
     <mat-card-title>    
              
-        Uzupełnij poniższe pola aby dodać nową okazję  
+        Uzupełnij poniższe pola, aby dodać nową okazję  
     </mat-card-title>    
     
     <mat-card-content>    
@@ -49,7 +49,7 @@
   
                         </mat-form-field>    
                         <form>
-                        <input id="image" name="image" type="file" (change)="onFileSelected($event)"  color="accent" accept=".png" >   
+                        <input type="file" (change)="onFileSelected($event)"  color="accent" accept=".png" >   
                         <button type="reset" (click)="deleteImg()">Usuń obrazek</button>
                         <br/>  <br/>  
                         </form>
