@@ -1,7 +1,7 @@
 .mat-card {
       
     width: 250px;    
-    height: 150px;   
+    height: 250px;   
     margin-right: 10px;
     margin-left: 10px;
     margin-top: 15px;    
@@ -54,4 +54,14 @@ a:active {
     color: yellow;
     background-color: transparent;
     text-decoration: underline;
+}
+mat-card img{
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 120px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: auto;
+  max-height: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }

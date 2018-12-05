@@ -10,11 +10,13 @@ import { HttpClient,HttpHeaders} from '@angular/common/http';
   styleUrls: ['./add-deal.component.css']
 })
 export class AddDealComponent implements OnInit {
-  image: File;
+  file: File;
+  
   categories : Array<any>;
   model : DealAddModel = {
   name:'',
   price:'',
+  image:'',
   link:'',
   description:'',
   categoryID:0 
@@ -33,21 +35,17 @@ export class AddDealComponent implements OnInit {
 
 }
 addDeal(): void {  
+  this.model.image=this.file.name;
+  var veri;   
   let url = "http://localhost:8080/deals";
-  let imgl = 'http://localhost:8080/uploadFile';
+  let imgl = 'http://localhost:8080/uploadfile';
   var uploadData = new FormData();
-  uploadData.append('image', this.image);
+  uploadData.append('file', this.file);
  
 
  
-  const httpOptions = {
-    headers: new HttpHeaders({
-    'Content-Type':  'multipart/form-data'    
-   })
-};
-        this.http.post('http://localhost:8080/uploadFile', uploadData,httpOptions);
 
- 
+    
 
   
   
@@ -59,12 +57,20 @@ this.http.post(url, this.model).subscribe(
   err =>{
     alert("Błąd dodawania okazji");  }
 )
+this.http.post('http://localhost:8080/uploadfile', uploadData).subscribe(data => {
+  console.log( data['_body']);
+  veri=data['_body'];
+  veri = veri.replace(/\\/g, "");
+  veri = JSON.parse(veri);
+  alert(veri);
+});
+
 
 
 }
 
 onFileSelected(event){
-  this.image=event.target.files[0];
+  this.file=event.target.files[0];
   this.vis=true;  
   var reader = new FileReader();
 
@@ -77,7 +83,7 @@ onFileSelected(event){
 deleteImg(){
 this.vis=false;
 this.imgurl='';
-this.image=null;
+this.file=null;
 
 
 }
@@ -88,5 +94,6 @@ export interface DealAddModel{
   price:String
   categoryID:Number
   link:String
+  image:String
 }
 
