@@ -42,7 +42,7 @@
                     <td ><br>    
                         <mat-form-field>    
                             
-                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"  [(ngModel)]="model.categoryID" required>                                   
+                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"  [(value)]="model.categoryID" required>                                   
                                     <mat-option *ngFor="let category of categories" value={{category.category_id}}  >{{category.category_name}}</mat-option>                        
                             </mat-select >                    
                             
