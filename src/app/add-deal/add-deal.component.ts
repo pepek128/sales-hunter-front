@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from '../category.service';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { FormControl, FormGroup } from '@angular/forms'
+import { Validators } from '@angular/forms';
 
 
 
@@ -11,17 +13,20 @@ import { HttpClient,HttpHeaders} from '@angular/common/http';
 })
 export class AddDealComponent implements OnInit {
   file: File;
-  
+ 
+
+
+
   categories : Array<any>;
-  model : DealAddModel = {
-  name:'',
-  price:'',
-  image:'',
-  link:'',
-  description:'',
-  categoryID:0 
+  model = new FormGroup({
+  name : new FormControl('',Validators.required),
+  description: new FormControl('',Validators.required),
+  price: new FormControl('',Validators.required),
+  categoryID: new FormControl('',Validators.required),
+  link: new FormControl(''),
+  image: new FormControl(''),
   
-  };
+  });
   public vis=false;
   imgurl:'';
 
@@ -34,30 +39,22 @@ export class AddDealComponent implements OnInit {
 
 
 }
-addDeal(): void {  
-  this.model.image=this.file.name;
+addDeal(): void {   
   var veri;   
   let url = "http://localhost:8080/deals";
   let imgl = 'http://localhost:8080/uploadfile';
-  var uploadData = new FormData();
-  uploadData.append('file', this.file);
- 
-
- 
-
-    
-
-  
+  var uploadData = new FormData();  
+  uploadData.append('file', this.file); 
   
 
-this.http.post(url, this.model).subscribe(
+this.http.post(url, this.model.value).subscribe(
   res =>{
     location.reload() ;
   },
   err =>{
     alert("Błąd dodawania okazji");  }
 )
-this.http.post('http://localhost:8080/uploadfile', uploadData).subscribe(data => {
+this.http.post(imgl, uploadData).subscribe(data => {
   console.log( data['_body']);
   veri=data['_body'];
   veri = veri.replace(/\\/g, "");
@@ -73,6 +70,7 @@ onFileSelected(event){
   this.file=event.target.files[0];
   this.vis=true;  
   var reader = new FileReader();
+ this.model.patchValue({image : this.file.name});
 
   reader.readAsDataURL(event.target.files[0]); // read file as data url
  
@@ -88,12 +86,5 @@ this.file=null;
 
 }
 }
-export interface DealAddModel{
-  description:String
-  name:String
-  price:String
-  categoryID:Number
-  link:String
-  image:String
-}
+
 

@@ -9,32 +9,32 @@
             <div *ngIf="vis">
             <img [src]="imgurl" height="60" > <br/>  
         </div>
-        <form  #addingForm="ngForm" (submit)="addDeal()">    
+        <form [formGroup]="model" (submit)="addDeal()">    
             <table>    
                 <tr>    
                        
                         <mat-form-field class="demo-full-width" >    
-                            <input matInput placeholder='Nazwa okazji' maxlength="100" [(ngModel)]="model.name" name="dealName" required>                               
+                            <input matInput placeholder='Nazwa okazji' maxlength="100" formControlName="name" name="dealName" required>                               
                         </mat-form-field>    
                       </tr>
                       <tr>   
                     <td>    
                         <mat-form-field class="demo-full-width">    
-                            <textarea matInput placeholder="Opis okazji" matTextareaAutosize matAutosizeMinRows="6" matAutosizeMaxRows="6" [(ngModel)]="model.description" name="dealDesc" required></textarea> 
+                            <textarea matInput placeholder="Opis okazji" matTextareaAutosize matAutosizeMinRows="6" matAutosizeMaxRows="6" formControlName="description" name="dealDesc" required></textarea> 
                         </mat-form-field>    
                     </td>    
                 </tr>    
                 <tr>    
                     <td>    
                         <mat-form-field class="demo-full-width">    
-                            <input matInput placeholder="Link" [(ngModel)]="model.link" name="dealLink" required> 
+                            <input matInput placeholder="Link" formControlName="link" name="dealLink" required> 
                         </mat-form-field>    
                     </td>    
                 </tr>    
                 <tr>    
                     <td>    
                         <mat-form-field class="demo-full-width">    
-                            <input matInput placeholder="Cena" [(ngModel)]="model.price" name="dealPrice" required> 
+                            <input matInput placeholder="Cena" formControlName="price" name="dealPrice" required> 
                         </mat-form-field>    
                     </td>    
                 </tr>    
@@ -42,7 +42,7 @@
                     <td ><br>    
                         <mat-form-field>    
                             
-                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"  [(value)]="model.categoryID" required>                                   
+                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"   formControlName="categoryID" required>                                   
                                     <mat-option *ngFor="let category of categories" value={{category.category_id}}  >{{category.category_name}}</mat-option>                        
                             </mat-select >                    
                             
@@ -61,7 +61,7 @@
                 
                 <tr>    
                     <td class="content-center">    
-                        <button [disabled]="!addingForm.valid" type="submit"  mat-raised-button color="accent">Dodaj</button>    
+                        <button  type="submit" [disabled]="model.invalid" mat-raised-button color="accent">Dodaj</button>    
                         <button type="reset" mat-raised-button color ="accent">Wyczyść</button>  
                                                  
                     </td>    
@@ -70,4 +70,5 @@
         </form>    
     </mat-card-content>    
 </mat-card>   
+
 
