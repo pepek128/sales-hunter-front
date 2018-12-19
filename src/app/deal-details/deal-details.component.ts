@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { DealService } from '../deal.service';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
-import { NumberValueAccessor } from '@angular/forms/src/directives';
 
 @Component({
-  selector: 'app-deal-list',
-  templateUrl: './deal-list.component.html',
-  styleUrls: ['./deal-list.component.css']
+  selector: 'app-deal-details',
+  templateUrl: './deal-details.component.html',
+  styleUrls: ['./deal-details.component.css']
 })
-export class DealListComponent implements OnInit {
-  deals : Array<any>;
-  constructor(private dealService: DealService,private http: HttpClient) { }
+export class DealDetailsComponent implements OnInit {
+  id : String;
+  deal: Array<any>;
+
+  constructor(private route: ActivatedRoute,private dealService: DealService,private http: HttpClient) { }
 
   ngOnInit() {
-
-    this.dealService.getAll().subscribe(data => {
-      this.deals = data;
+    this.id = this.route.snapshot.paramMap.get("id")
+    this.dealService.getDeal(this.id).subscribe(data => {
+      this.deal = data;
     });
-
-
-
   }
   plusScore(deal){
     let url = "http://localhost:8080/deals";
@@ -43,7 +42,5 @@ export class DealListComponent implements OnInit {
     err =>{
       alert("Błąd dodawania okazji");  }
 
-  }
-
-
+}
 }

@@ -15,7 +15,8 @@
                        
                         <mat-form-field class="demo-full-width" >    
                             <input matInput placeholder='Nazwa okazji' maxlength="100" formControlName="name" name="dealName" required>                               
-                        </mat-form-field>    
+                        </mat-form-field>  
+                        <mat-error *ngIf="f.name.touched && f.name.hasError('maxlength')">Nazwa może mieć maksymalnie 100 znaków</mat-error>  
                       </tr>
                       <tr>   
                     <td>    
@@ -27,8 +28,9 @@
                 <tr>    
                     <td>    
                         <mat-form-field class="demo-full-width">    
-                            <input matInput placeholder="Link" formControlName="link" name="dealLink" required> 
+                            <input matInput placeholder="Link" formControlName="link" name="dealLink">                             
                         </mat-form-field>    
+                        <mat-error *ngIf="f.link.touched && f.link.hasError('pattern')">Link musi być zaczynać się na www</mat-error>
                     </td>    
                 </tr>    
                 <tr>    
@@ -36,6 +38,7 @@
                         <mat-form-field class="demo-full-width">    
                             <input matInput placeholder="Cena" formControlName="price" name="dealPrice" required> 
                         </mat-form-field>    
+                        <mat-error *ngIf="f.price.touched && f.price.hasError('pattern')">Cena musi być podana w formacie "xxx zł"</mat-error>
                     </td>    
                 </tr>    
                 <tr>                        
@@ -43,13 +46,13 @@
                         <mat-form-field>    
                             
                             <mat-select name="dealCategory" placeholder="Wybierz kategorie"   formControlName="categoryID" required>                                   
-                                    <mat-option *ngFor="let category of categories" value={{category.category_id}}  >{{category.category_name}}</mat-option>                        
+                                    <mat-option *ngFor="let category of categories" value={{category.categoryID}}  >{{category.category_name}}</mat-option>                        
                             </mat-select >                    
                             
   
                         </mat-form-field>    
                         <form>
-                        <input type="file" (change)="onFileSelected($event)"  color="accent" accept=".png" >   
+                        <input type="file" (change)="onFileSelected($event)"  color="accent" accept="image/x-png,image/jpeg" >   
                         <button type="reset" (click)="deleteImg()">Usuń obrazek</button>
                         <br/>  <br/>  
                         </form>

@@ -3,6 +3,7 @@ import {CategoryService} from '../category.service';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Validators } from '@angular/forms';
+import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/util';
 
 
 
@@ -19,11 +20,11 @@ export class AddDealComponent implements OnInit {
 
   categories : Array<any>;
   model = new FormGroup({
-  name : new FormControl('',Validators.required),
+  name : new FormControl('',[Validators.required, Validators.maxLength(60)]),
   description: new FormControl('',Validators.required),
-  price: new FormControl('',Validators.required),
+  price: new FormControl('',[Validators.required, Validators.pattern("^[0-9]{1,7} zł")]),
   categoryID: new FormControl('',Validators.required),
-  link: new FormControl(''),
+  link: new FormControl('', Validators.pattern("^www\.([a-zA-Z0-9.-])+(\.[a-z]{2,3})$")),
   image: new FormControl(''),
   
   });
@@ -36,10 +37,12 @@ export class AddDealComponent implements OnInit {
     this.categoryService.getAll().subscribe(data => {
       this.categories= data;
   });
-
+ 
 
 }
+get f() { return this.model.controls; }
 addDeal(): void {   
+ 
   var veri;   
   let url = "http://localhost:8080/deals";
   let imgl = 'http://localhost:8080/uploadfile';
@@ -85,6 +88,7 @@ this.file=null;
 
 
 }
+
 }
 
 

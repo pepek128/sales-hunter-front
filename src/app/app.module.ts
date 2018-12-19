@@ -32,6 +32,7 @@ import {
 
 import { LayoutModule } from '@angular/cdk/layout';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { DealDetailsComponent } from './deal-details/deal-details.component';
 
 
 
@@ -59,6 +60,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     DealListComponent,
     AddDealComponent,
     SidenavComponent,
+    DealDetailsComponent,
     
     
    
