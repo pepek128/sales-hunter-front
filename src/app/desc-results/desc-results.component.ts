@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DealService } from '../deal.service';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
-
 @Component({
-  selector: 'app-deal-details',
-  templateUrl: './deal-details.component.html',
-  styleUrls: ['./deal-details.component.css']
+  selector: 'app-desc-results',
+  templateUrl: './desc-results.component.html',
+  styleUrls: ['./desc-results.component.css']
 })
-export class DealDetailsComponent implements OnInit {
-  id : String;
-  deal: Array<any>;
+export class DescResultsComponent implements OnInit {
+
+   
+  text : String;
+  deals: Array<any>;
 
   constructor(private route: ActivatedRoute,private dealService: DealService,private http: HttpClient) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get("id")
-    this.dealService.getDeal(this.id).subscribe(data => {
-      this.deal = data;
+    this.text = this.route.snapshot.paramMap.get("text")
+    this.dealService.getDealsByDesc(this.text).subscribe(data => {
+      this.deals = data;
     });
   }
   plusScore(deal){
@@ -29,8 +30,7 @@ export class DealDetailsComponent implements OnInit {
     },
     err =>{
       alert("Błąd dodawania okazji");  }
-  )
-
+  );
 
   }
   minusScore(deal){
@@ -42,7 +42,7 @@ export class DealDetailsComponent implements OnInit {
     },
     err =>{
       alert("Błąd dodawania okazji");  }
-  )
+  );
+  }
 
-}
 }

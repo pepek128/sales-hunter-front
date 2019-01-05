@@ -1,0 +1,41 @@
+.mat-card {    
+    text-align: -webkit-center;    
+}    
+       
+       
+    
+body {    
+    margin: 0;    
+    font-family: Roboto, sans-serif;    
+}    
+    
+mat-card {    
+    max-width: 80%;    
+    margin: 2em auto;    
+    text-align: center;    
+}        
+.buttons {
+    font-size: 60%;
+    font-style: italic;
+    display: inline-flex;
+    flex-direction: row;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+ .div{
+     margin-top: 5%;
+ }
+ .text{
+     margin:10%;
+     font-size: 60%;
+    font-style: italic;
+    
+ }
+ .dealCategory{
+    font-size: 60%;
+    
+}
+  
+ 

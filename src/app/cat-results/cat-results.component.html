@@ -1,0 +1,32 @@
+<div class="title" >Wyniki wyszukiwania:</div>
+<div *ngFor="let deal of deals">
+    <mat-card>
+    <mat-card-title ><a href="/deals/{{deal.dealID}}">{{deal.name}}</a></mat-card-title>
+    <div *ngIf="deal.image">
+    <img mat-card-image  src="assets/images/{{deal.image}}">
+    </div>
+    <mat-card-subtitle>{{deal.price}}  </mat-card-subtitle>
+    <mat-card-content>{{deal.description}}</mat-card-content>
+    
+    <mat-card-footer>Kategoria: {{deal.category.category_name}}
+        <br /><a *ngIf="deal.link" href="//{{deal.link}}" target="_blank">Link do okazji</a>  
+        <br /><br /><br />
+        <div class="points">Punkty: {{deal.score}} 
+                <br />
+            <button (click)="plusScore(deal)" mat-button mat-button color="primary">
+                <mat-icon class="arrow">arrow_drop_up</mat-icon>
+                
+            </button>
+            <button (click)="minusScore(deal)"mat-button mat-button color="warn">
+                    <mat-icon class="arrow">arrow_drop_down</mat-icon>
+                    
+                </button>
+    
+    
+        </div>
+    
+    </mat-card-footer>
+    
+    </mat-card>
+    
+    </div>

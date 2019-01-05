@@ -33,6 +33,10 @@ import {
 import { LayoutModule } from '@angular/cdk/layout';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { DealDetailsComponent } from './deal-details/deal-details.component';
+import { SearchComponent } from './search/search.component';
+import { DescResultsComponent } from './desc-results/desc-results.component';
+import { NameResultsComponent } from './name-results/name-results.component';
+import { CatResultsComponent } from './cat-results/cat-results.component';
 
 
 
@@ -61,6 +65,10 @@ import { DealDetailsComponent } from './deal-details/deal-details.component';
     AddDealComponent,
     SidenavComponent,
     DealDetailsComponent,
+    SearchComponent,
+    DescResultsComponent,
+    NameResultsComponent,
+    CatResultsComponent,
     
     
    

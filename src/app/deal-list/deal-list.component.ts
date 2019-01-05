@@ -30,7 +30,7 @@ export class DealListComponent implements OnInit {
     },
     err =>{
       alert("Błąd dodawania okazji");  }
-
+  );
 
   }
   minusScore(deal){
@@ -42,7 +42,7 @@ export class DealListComponent implements OnInit {
     },
     err =>{
       alert("Błąd dodawania okazji");  }
-
+  );
   }
 
 
