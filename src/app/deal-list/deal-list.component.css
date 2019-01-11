@@ -1,11 +1,18 @@
-.mat-card {
-      
-    width: 250px;    
-    height: 300px;   
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 15px;    
-    float:left;
+.cardList{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left:7%;
+  
+}
+.mat-card {  
+  
+    width: 250px;        
+    height: 300px;  
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-top: 1%;    
+    
     
   }
   .mat-card-title{  
@@ -36,6 +43,7 @@
     text-align: center;
     font-size: 11px;
     font-weight: bold;
+    margin-bottom: 1%;
   }
   a:link {
     color: green; 
@@ -57,9 +65,9 @@ a:active {
 }
 mat-card img{
   object-fit: cover; /*this makes de image in src fit to the size of specified below*/
-  width: 120px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  width: 40%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
   height: auto;
-  max-height: 50%;
+  max-height: 30%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -69,11 +77,14 @@ mat-card img{
 }
 .points{
   font-size: 15px;
+
   
 
 }
-::ng-deep .mat-icon.arrow{
-  height:40px !important;
-  width:40px !important;
-  font-size:40px !important;
+.mat-icon.arrow{
+  
+  height:40px ;
+  width:40px ;
+  font-size:40px ;
+  
 }

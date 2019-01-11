@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from '../category.service';
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Validators } from '@angular/forms';
-import { allowPreviousPlayerStylesMerge } from '@angular/animations/browser/src/util';
+
 
 
 
@@ -20,11 +20,11 @@ export class AddDealComponent implements OnInit {
 
   categories : Array<any>;
   model = new FormGroup({
-  name : new FormControl('',[Validators.required, Validators.maxLength(60)]),
-  description: new FormControl('',Validators.required),
-  price: new FormControl('',[Validators.required, Validators.pattern("^[0-9]{1,7} zł")]),
+  name : new FormControl('',[Validators.required, Validators.maxLength(100)]),
+  description: new FormControl('',[Validators.required, Validators.maxLength(1200)]),
+  price: new FormControl('',Validators.pattern(/^[0-9]{1,7}(\,[0-9]{2})* zł$/)),
   categoryID: new FormControl('',Validators.required),
-  link: new FormControl('', Validators.pattern("^www\.([a-zA-Z0-9.-])+(\.[a-z]{2,3})$")),
+  link: new FormControl('', Validators.pattern(/^www\.([a-zA-Z0-9.-])+(\.[a-z]{2,3})((\/{1})(.*))*$/) ),
   image: new FormControl(''),
   
   });
@@ -42,9 +42,8 @@ export class AddDealComponent implements OnInit {
 }
 get f() { return this.model.controls; }
 addDeal(): void {   
- 
-  var veri;   
-  let url = "http://localhost:8080/deals";
+  
+  let url = "http://localhost:8080/deal";
   let imgl = 'http://localhost:8080/uploadfile';
   var uploadData = new FormData();  
   uploadData.append('file', this.file); 
@@ -57,13 +56,10 @@ this.http.post(url, this.model.value).subscribe(
   err =>{
     alert("Błąd dodawania okazji");  }
 )
-this.http.post(imgl, uploadData).subscribe(data => {
-  console.log( data['_body']);
-  veri=data['_body'];
-  veri = veri.replace(/\\/g, "");
-  veri = JSON.parse(veri);
-  alert(veri);
-});
+this.http.post(imgl, uploadData).subscribe(
+    err =>{
+    alert("Błąd dodawania zdjęcia");  }
+)
 
 
 
@@ -71,11 +67,10 @@ this.http.post(imgl, uploadData).subscribe(data => {
 
 onFileSelected(event){
   this.file=event.target.files[0];
-  this.vis=true;  
+  this.vis=true;    
   var reader = new FileReader();
  this.model.patchValue({image : this.file.name});
-
-  reader.readAsDataURL(event.target.files[0]); // read file as data url
+ reader.readAsDataURL(event.target.files[0]); // read file as data url
  
   reader.onload = (event:any) => { // called once readAsDataURL is completed
   this.imgurl = event.target.result;}

@@ -21,7 +21,7 @@ export class DealDetailsComponent implements OnInit {
     });
   }
   plusScore(deal){
-    let url = "http://localhost:8080/deals";
+    let url = "http://localhost:8080/deal";
   deal.score=deal.score+1;
   this.http.put(url, deal).subscribe(
     res =>{
@@ -34,7 +34,7 @@ export class DealDetailsComponent implements OnInit {
 
   }
   minusScore(deal){
-    let url = "http://localhost:8080/deals";
+    let url = "http://localhost:8080/deal";
   deal.score=deal.score-1;
   this.http.put(url, deal).subscribe(
     res =>{

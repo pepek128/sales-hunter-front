@@ -1,52 +1,51 @@
-<mat-card>    
-  <!-- Title of an Card -->    
-  <mat-card-title>    
-           
-      Wybierz kryterium wyszukiwania okazji:
-      <br/>  
-      <mat-radio-group class="buttons" >
-        <mat-radio-button class="radio-button" #nameOp value="1">Po nazwie</mat-radio-button>
-        <mat-radio-button class="radio-button" #desc value="2">Po opisie</mat-radio-button>
-        <mat-radio-button class="radio-button" #cat  value="3">Po kategorii</mat-radio-button>
-      </mat-radio-group>
+<mat-card>
+  <!-- Title of an Card -->
+  <mat-card-title>
+
+    Wybierz kryterium wyszukiwania okazji:
+    <br />
+    <mat-radio-group class="buttons">
+      <mat-radio-button class="radio-button" #nameOp value="1">Po nazwie</mat-radio-button>
+      <mat-radio-button class="radio-button" #desc value="2">Po opisie</mat-radio-button>
+      <mat-radio-button class="radio-button" #cat value="3">Po kategorii</mat-radio-button>
+    </mat-radio-group>
+
+
+    <div class="search-field" *ngIf="nameOp.checked">
+      <a class="text">Podaj nazwę szukanej okazji </a><br />
+      <mat-form-field>
+        <input matInput [formControl]="name" name="nameF" required>
+      </mat-form-field><br />
+      <a class="button" *ngIf="name.value" href="/search/nameResults/{{name.value}}">Szukaj</a>
       
-      
-        <div class="search-field" *ngIf="nameOp.checked">
-            <a class="text">Podaj nazwę szukanej okazji </a><br/>  
-          <mat-form-field >          
-            <input matInput [formControl]="name" name="nameF" required>
-          </mat-form-field><br/>  
-          <a href="/search/nameResults/{{name.value}}">Szukaj</a>
-        </div>
-        
-        <div class="search-field" *ngIf="desc.checked">
-            <a class="text"> Podaj nazwę szukanego wyrazu </a><br/>  
-          <mat-form-field >
-            <input matInput  [formControl]="text" name="text" required>
-          </mat-form-field><br/>           
-          <div class="descButton" ng-if="text">
-          <a href="/search/descResults/{{text.value}}">Szukaj</a>
-        </div> 
+    </div>
 
-        </div>
-        
-        <div class="search-field"  *ngIf="cat.checked">
-            <a class="text">Wybierz nazwę kategorii </a><br/>  
-          <mat-form-field >
-              
-                            
-              <mat-select name="dealCategory" class="dealCategory" [formControl]="categoryID" required>                                   
-                      <mat-option *ngFor="let category of categories" value={{category.categoryID}}  >{{category.category_name}}</mat-option>                        
-              </mat-select >                    
-              
+    <div class="search-field" *ngIf="desc.checked">
+      <a class="text"> Podaj nazwę szukanego wyrazu </a><br />
+      <mat-form-field>
+        <input matInput [formControl]="text" name="text" required>
+      </mat-form-field><br />
+      <div class="descButton" *ngIf="text.value">
+        <a  class="button"  href="/search/descResults/{{text.value}}">Szukaj</a>
+      </div>
 
-            
-          </mat-form-field><br/>  
-          <a href="/search/catResults/{{categoryID.value}}">Szukaj</a>
-        </div>
-        
-  </mat-card-title>      
-     
-</mat-card>   
+    </div>
+
+    <div class="search-field" *ngIf="cat.checked">
+      <a  class="text">Wybierz nazwę kategorii </a><br />
+      <mat-form-field>
 
 
+        <mat-select name="dealCategory" class="dealCategory" [formControl]="categoryID" required>
+          <mat-option *ngFor="let category of categories" value={{category.categoryID}}>{{category.category_name}}</mat-option>
+        </mat-select>
+
+
+
+      </mat-form-field><br />
+      <a class="button" *ngIf="categoryID.value"  href="/search/catResults/{{categoryID.value}}">Szukaj</a>
+    </div>
+
+  </mat-card-title>
+
+</mat-card>

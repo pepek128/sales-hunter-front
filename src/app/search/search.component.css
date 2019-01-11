@@ -37,5 +37,12 @@ mat-card {
     font-size: 60%;
     
 }
-  
+.button {
+    font: bold 15px Calibri;
+    text-decoration: none;
+    background-color: #FFC107;;
+    color: #333333;
+    padding: 6px 20px 6px 20px;
+    
+  }
  

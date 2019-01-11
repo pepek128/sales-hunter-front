@@ -13,47 +13,52 @@
             <table>    
                 <tr>    
                        
-                        <mat-form-field class="demo-full-width" >    
-                            <input matInput placeholder='Nazwa okazji' maxlength="100" formControlName="name" name="dealName" required>                               
+                        <mat-form-field class="demo-full-width" appearance="outline" >   
+                                <mat-label>Nazwa okazji </mat-label> 
+                            <input matInput maxlength="100" formControlName="name"  required>                               
                         </mat-form-field>  
                         <mat-error *ngIf="f.name.touched && f.name.hasError('maxlength')">Nazwa może mieć maksymalnie 100 znaków</mat-error>  
                       </tr>
                       <tr>   
                     <td>    
-                        <mat-form-field class="demo-full-width">    
-                            <textarea matInput placeholder="Opis okazji" matTextareaAutosize matAutosizeMinRows="6" matAutosizeMaxRows="6" formControlName="description" name="dealDesc" required></textarea> 
+                        <mat-form-field class="demo-full-width" appearance="outline">    
+                                <mat-label>Opis okazji </mat-label> 
+                            <textarea matInput matTextareaAutosize matAutosizeMinRows="6" matAutosizeMaxRows="6" formControlName="description" name="dealDesc" required></textarea> 
                         </mat-form-field>    
                     </td>    
                 </tr>    
                 <tr>    
                     <td>    
-                        <mat-form-field class="demo-full-width">    
-                            <input matInput placeholder="Link" formControlName="link" name="dealLink">                             
+                        <mat-form-field class="demo-full-width" appearance="outline">  
+                                <mat-label>Link </mat-label>   
+                            <input matInput formControlName="link" >                             
                         </mat-form-field>    
-                        <mat-error *ngIf="f.link.touched && f.link.hasError('pattern')">Link musi być zaczynać się na www</mat-error>
+                        <mat-error *ngIf="f.link.touched && f.link.hasError('pattern')">Link musi być w dobrym formacie i zaczynać się od www</mat-error>
                     </td>    
                 </tr>    
                 <tr>    
                     <td>    
-                        <mat-form-field class="demo-full-width">    
-                            <input matInput placeholder="Cena" formControlName="price" name="dealPrice" required> 
+                        <mat-form-field class="demo-full-width" appearance="outline">    
+                                <mat-label>Cena </mat-label> 
+                            <input matInput placeholder="Cena" formControlName="price" > 
                         </mat-form-field>    
-                        <mat-error *ngIf="f.price.touched && f.price.hasError('pattern')">Cena musi być podana w formacie "xxx zł"</mat-error>
+                        <mat-error *ngIf="f.price.touched && f.price.hasError('pattern')">Cena musi być podana w formacie "xxx,xx zł"</mat-error>
                     </td>    
                 </tr>    
                 <tr>                        
                     <td ><br>    
-                        <mat-form-field>    
-                            
-                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"   formControlName="categoryID" required>                                   
+                        <mat-form-field appearance="outline">    
+                                <mat-label>Kategoria </mat-label> 
+                            <mat-select name="dealCategory" placeholder="Wybierz kategorie"   formControlName="categoryID" required>  
+                                                                 
                                     <mat-option *ngFor="let category of categories" value={{category.categoryID}}  >{{category.category_name}}</mat-option>                        
                             </mat-select >                    
                             
   
                         </mat-form-field>    
                         <form>
-                        <input type="file" (change)="onFileSelected($event)"  color="accent" accept="image/x-png,image/jpeg" >   
-                        <button type="reset" (click)="deleteImg()">Usuń obrazek</button>
+                        <input type="file" mat-raised-button color ="accent" (change)="onFileSelected($event)"  color="accent" accept="image/x-png,image/jpeg" >   
+                        <button  type="reset" (click)="deleteImg()">Usuń obrazek</button>
                         <br/>  <br/>  
                         </form>
 

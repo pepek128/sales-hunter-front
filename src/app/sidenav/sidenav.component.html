@@ -1,35 +1,41 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(closed)"
-     >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(closed)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      
-      <a style="font-size:15px;" mat-list-item href="">Strona główna</a>
-      <a style="font-size:15px;" mat-list-item href="/add">Dodaj okazję</a>
-      <a style="font-size:15px;" mat-list-item href="/search">Szukaj okazji</a>
-      <a style="font-size:15px;" mat-list-item href="#">Zaloguj się</a>
-
     
+      <a style="font-size:15px;" mat-list-item href="">Strona główna</a>     
+      <a style="font-size:15px;" mat-list-item href="/search">Szukaj okazji</a>
+      <div *ngIf="!info.token">         
+      <a style="font-size:15px;" mat-list-item href="/auth/login">Zaloguj się</a>
+      <a style="font-size:15px;" mat-list-item href="/signup">Zarejestruj się</a>
+    </div>
+      <div *ngIf="info.token">
+          <a style="font-size:15px;" mat-list-item href="/add">Dodaj okazję</a>
+        <a style="font-size:15px;" mat-list-item (click)="logout()">Wyloguj się</a>
+
+      </div>
+
+
+
+
+
+
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content >
+  <mat-sidenav-content>
     <mat-toolbar class="toolbar">
-        <button class="button"
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        >
+      <button class="button" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-            <img class="icon" src="assets/sales-hunter-logo.png" >          
-          
-     
-      
+      <img class="icon" src="assets/sales-hunter-logo.png">
+      <span class="example-fill-remaining-space"></span>
+
+      <div *ngIf="info.token">
+          <a class="user"> Zalogowano jako: {{info.username}}</a> 
+
+      </div>
     </mat-toolbar>
-    
+
   </mat-sidenav-content>
 </mat-sidenav-container>

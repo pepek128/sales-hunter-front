@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-title>
+    Uzupełnij dane do rejestracji
+  </mat-card-title>
+
+  <mat-card-content>
+
+    <form [formGroup]="registerModel" (submit)="onSubmit()">
+      <table>
+        <tr>
+          <mat-form-field class="demo-full-width" appearance="outline">
+            <mat-label>Imię</mat-label>
+            <input matInput maxlength="15" formControlName="name" required>
+          </mat-form-field>
+          <mat-error *ngIf="f.name.touched && f.name.hasError('maxlength')">Imie może mieć maksymalnie 15 znaków</mat-error>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width" appearance="outline">
+              <mat-label>Nazwa użytkownika</mat-label>
+              <input matInput maxlength="15" formControlName="username" required>
+            </mat-form-field>
+            <mat-error *ngIf="f.username.touched && f.username.hasError('maxlength')">Nazwa użytkownika może mieć
+              maksymalnie 15 znaków</mat-error>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width" appearance="outline">
+              <mat-label>Adres E-mail</mat-label>
+              <input matInput formControlName="mail" required>
+            </mat-form-field>
+            <mat-error *ngIf="f.mail.touched && f.mail.hasError('pattern')">Podany adres jest nieprawidłowy</mat-error>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="demo-full-width" appearance="outline">
+              <mat-label>Hasło</mat-label>
+              <input  type="password" matInput minlength="6" formControlName="password" required>
+            </mat-form-field>
+            <mat-error *ngIf="f.password.touched && f.password.hasError('pattern')">Hasło jest nieprawidłowe</mat-error>
+          </td>
+        </tr>
+        <tr>
+          <td class="content-center">
+            <button type="submit" [disabled]="registerModel.invalid" mat-raised-button color="accent">Zarejestruj</button>
+            <button type="reset" mat-raised-button color="accent">Wyczyść</button>
+
+          </td>
+        </tr>
+      </table>
+    </form>   
+
+<div *ngIf="isSignedUp; else signupForm">
+  <br />
+  Rejestracja zakończona sukcesem. Możesz się zalogować.
+</div>
+<div *ngIf="isSignUpFailed" class="alert alert-warning">
+    <br />
+    Rejestracja nieudana!<br/>{{errorMessage}}
+  </div>
+  </mat-card-content>
+
+</mat-card>

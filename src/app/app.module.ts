@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {CdkTableModule} from '@angular/cdk/table';
 import { DealService } from './deal.service';
 import { CategoryService } from './category.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +9,8 @@ import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AddDealComponent } from './add-deal/add-deal.component';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';  
+import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
+import { FlexLayoutModule } from '@angular/flex-layout'; 
 
 import {      
   MatButtonModule,      
@@ -20,14 +20,14 @@ import {
   MatCardModule,      
   MatFormFieldModule,      
   MatInputModule,      
-  MatDatepickerModule,      
-  MatDatepicker,      
+  MatDatepickerModule,       
   MatNativeDateModule,      
   MatRadioModule,      
   MatSelectModule,      
   MatOptionModule,     
   MatSidenavModule, 
-  MatSlideToggleModule,ErrorStateMatcher,ShowOnDirtyErrorStateMatcher, MatListModule      
+  MatSlideToggleModule,ErrorStateMatcher,ShowOnDirtyErrorStateMatcher, MatListModule   
+     
 } from '@angular/material';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -37,6 +37,12 @@ import { SearchComponent } from './search/search.component';
 import { DescResultsComponent } from './desc-results/desc-results.component';
 import { NameResultsComponent } from './name-results/name-results.component';
 import { CatResultsComponent } from './cat-results/cat-results.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+
+import { httpInterceptorProviders } from './auth/auth-interceptor';
+
 
 
 
@@ -69,7 +75,9 @@ import { CatResultsComponent } from './cat-results/cat-results.component';
     DescResultsComponent,
     NameResultsComponent,
     CatResultsComponent,
-    
+    LoginComponent,
+    RegisterComponent,
+   
     
    
   ],
@@ -98,9 +106,10 @@ import { CatResultsComponent } from './cat-results/cat-results.component';
     MatRadioModule,      
     MatSelectModule,      
     MatOptionModule,      
-    MatSlideToggleModule, LayoutModule, MatSidenavModule, MatListModule      
+    MatSlideToggleModule, LayoutModule, MatSidenavModule, MatListModule, 
+    FlexLayoutModule   
   ],
-  providers: [DealService,CategoryService],
+  providers: [DealService,CategoryService,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
