@@ -1,6 +1,10 @@
 <div class="cardList">
     <mat-card *ngFor="let deal of deals">
-        <mat-card-title><a href="/deals/{{deal.dealID}}">{{deal.name}}</a></mat-card-title>
+        <mat-card-title>        
+           
+            <a href="/deals/{{deal.dealID}}">{{deal.name}}</a>
+        
+        </mat-card-title>
 
         <img *ngIf="deal.image" mat-card-image src="assets/images/{{deal.image}}">
 
@@ -8,10 +12,16 @@
         <mat-card-content>{{deal.description}}</mat-card-content>
 
         <mat-card-footer>Kategoria: {{deal.category.category_name}}
-            <br /><a *ngIf="deal.link" href="//{{deal.link}}" target="_blank">Link do okazji</a>
+            <br />
+            <a *ngIf="deal.link" href="//{{deal.link}}" target="_blank">Link do okazji</a>
             <br /><br /><br />
-            <div class="points">Punkty: {{deal.score}}
-                <br />
+            
+            <div class="points">Punkty: {{deal.score}}</div>
+            <div *ngIf='isLoggedIn && deal.voted != name' class="points">      
+
+                    
+                    
+                        
                 <button (click)="plusScore(deal)" mat-button mat-button color="primary">
                     <mat-icon class="arrow">arrow_drop_up</mat-icon>
 
@@ -20,10 +30,11 @@
                     <mat-icon class="arrow">arrow_drop_down</mat-icon>
 
                 </button>
-
-
+                    
+            
             </div>
-
+            <br />
+           Autor: {{deal.user.username}}           
         </mat-card-footer>
 
     </mat-card>

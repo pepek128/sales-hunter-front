@@ -4,12 +4,11 @@
   flex-wrap: wrap;
   margin-left:7%;
   
- 
 }
 .mat-card {  
   
     width: 250px;        
-    height: 300px;  
+    height: 360px;  
     margin-right: 1%;
     margin-left: 1%;
     margin-top: 1%;    
@@ -89,6 +88,7 @@ mat-card img{
   font-size:40px ;
   
 }
+
 .title{
   margin-left:15%;
   margin-top:1%;

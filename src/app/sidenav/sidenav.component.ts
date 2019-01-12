@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TokenStorageService } from '../auth/token-storage.service';
 
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -18,17 +19,18 @@ export class SidenavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,private token: TokenStorageService) {}
+  constructor(private breakpointObserver: BreakpointObserver,private token: TokenStorageService,) {}
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    
    
     
   }
-  logout() {
+  logout() {    
     this.token.signOut();
     window.location.reload();
   }

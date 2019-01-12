@@ -42,6 +42,7 @@ import { RegisterComponent } from './register/register.component';
 
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
+import { VoteStatsService } from './vote-stats.service';
 
 
 
@@ -109,7 +110,7 @@ import { httpInterceptorProviders } from './auth/auth-interceptor';
     MatSlideToggleModule, LayoutModule, MatSidenavModule, MatListModule, 
     FlexLayoutModule   
   ],
-  providers: [DealService,CategoryService,httpInterceptorProviders],
+  providers: [DealService,CategoryService,httpInterceptorProviders,LoginComponent,VoteStatsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
