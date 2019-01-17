@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TokenStorageService } from '../auth/token-storage.service';
+import { DealService } from '../deal.service';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { TokenStorageService } from '../auth/token-storage.service';
   styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent {
+  deals:any;
   info: any;
   isLoggedIn: any;
 
@@ -19,14 +21,19 @@ export class SidenavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,private token: TokenStorageService,) {}
+  constructor(private breakpointObserver: BreakpointObserver,private token: TokenStorageService,private dealService: DealService) {}
   ngOnInit() {
     this.info = {
       token: this.token.getToken(),
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
+    this.dealService.getRecommended(this.info.username).subscribe(data => {      
+       this.deals = data;     
     
+        
+    
+    });
    
     
   }
@@ -34,5 +41,8 @@ export class SidenavComponent {
     this.token.signOut();
     window.location.reload();
   }
+details(deal){
+  window.location.href="/deals/"+deal.dealID;
 
+}
 }

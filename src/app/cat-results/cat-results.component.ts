@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DealService } from '../deal.service';
-import { HttpClient,HttpHeaders} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { TokenStorageService } from '../auth/token-storage.service';
 @Component({
   selector: 'app-cat-results',
@@ -24,9 +24,9 @@ export class CatResultsComponent implements OnInit {
     this.categoryID = this.route.snapshot.paramMap.get("categoryID")
     this.dealService.getDealsByCat(this.categoryID).subscribe(data => {      
       for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].votedusers.length; j++) {
+        for (var j = 0; j < data[i].votedDTO.length; j++) {
         
-          if(data[i].votedusers[j].username === this.name)
+          if(data[i].votedDTO[j].username === this.name)
           {
             data[i].voted=this.name;
           }
@@ -42,15 +42,18 @@ export class CatResultsComponent implements OnInit {
   plusScore(deal) {
     
     let url = "http://localhost:8080/deal";
-  
+    var updateData = new FormData();
 
 
    
     deal.score = deal.score + 1;
     deal.voted=this.tokenStorage.getUsername();   
-   
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);
+  
 
-    this.http.put(url, deal).subscribe(
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },
@@ -63,12 +66,16 @@ export class CatResultsComponent implements OnInit {
   }
   minusScore(deal) {
     let url = "http://localhost:8080/deal";
+    var updateData = new FormData();
     
     
   
     deal.score = deal.score - 1;
-    deal.voted=this.tokenStorage.getUsername();    
-    this.http.put(url, deal).subscribe(
+    deal.voted=this.tokenStorage.getUsername();  
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);  
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },

@@ -30,6 +30,31 @@
     top: 0; /* Sets the sticky toolbar to be on top */
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
+.recomm{
+  
+  display:flex;
+  background-color: rgb(136, 135, 135);  
+  min-height: 45px ;
+  height: 45px ;
+  font-size:15px;
+  
+  
+  
+}
+.mat-raised-button{
+  margin-left:1%;
+  width: 20%;        
+  height: 40px; 
+  overflow: hidden;
+    text-overflow: ellipsis;   
+    white-space: nowrap;
+}
+  
+ .recTitle{
+  font-size:15px;
+  color: white;
+ }
+
 .user{  
   font-size: 15px;
   font-weight: bold;

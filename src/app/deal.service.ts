@@ -17,6 +17,7 @@ export class DealService {
     return this.http.get('//localhost:8080/deals/'+id)
 
   }
+  
   getDealsByDesc(text:String): Observable<any> {
     return this.http.get('//localhost:8080/deals/search/desc/'+text)
 
@@ -27,6 +28,10 @@ export class DealService {
   }
   getDealsByCat(categoryID:String): Observable<any> {
     return this.http.get('//localhost:8080/deals/search/cat/'+categoryID)
+
+  }
+  getRecommended(username:String): Observable<any> {
+    return this.http.get('//localhost:8080/recommended/'+username)
 
   }
 }

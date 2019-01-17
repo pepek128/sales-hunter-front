@@ -31,6 +31,14 @@
 
       </div>
     </mat-toolbar>
-
+    
+    <div *ngIf="deals?.length>0" >
+    <mat-toolbar class="recomm">    
+      <p *ngIf="deals" class="recTitle" >Wybrane dla Ciebie</p> 
+        <button mat-raised-button color=warn *ngFor="let deal of deals" (click)="details(deal)">
+          {{deal.name}}
+        </button>      
+    </mat-toolbar>
+  </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

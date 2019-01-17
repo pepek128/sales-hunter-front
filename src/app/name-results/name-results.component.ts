@@ -27,9 +27,9 @@ export class NameResultsComponent implements OnInit {
 
     this.dealService.getDealsByName(this.name).subscribe(data => {      
       for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].votedusers.length; j++) {
+        for (var j = 0; j < data[i].votedDTO.length; j++) {
         
-          if(data[i].votedusers[j].username === this.votename)
+          if(data[i].votedDTO[j].username === this.votename)
           {
             data[i].voted=this.votename;
           }
@@ -43,15 +43,17 @@ export class NameResultsComponent implements OnInit {
   plusScore(deal) {
     
     let url = "http://localhost:8080/deal";
-  
+    var updateData = new FormData();
 
 
    
     deal.score = deal.score + 1;
     deal.voted=this.tokenStorage.getUsername();   
-   
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);
 
-    this.http.put(url, deal).subscribe(
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },
@@ -64,12 +66,15 @@ export class NameResultsComponent implements OnInit {
   }
   minusScore(deal) {
     let url = "http://localhost:8080/deal";
-    
+    var updateData = new FormData();
     
   
     deal.score = deal.score - 1;
     deal.voted=this.tokenStorage.getUsername();    
-    this.http.put(url, deal).subscribe(
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },

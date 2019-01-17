@@ -27,9 +27,9 @@ export class DealListComponent implements OnInit {
 
     this.dealService.getAll().subscribe(data => {      
       for (var i = 0; i < data.length; i++) {
-        for (var j = 0; j < data[i].votedusers.length; j++) {
+        for (var j = 0; j < data[i].votedDTO.length; j++) {
         
-          if(data[i].votedusers[j].username === this.name)
+          if(data[i].votedDTO[j].username === this.name)
           {
             data[i].voted=this.name;
           }
@@ -44,19 +44,26 @@ export class DealListComponent implements OnInit {
   
 
   }
-  plusScore(deal) {
+  plusScore(deal) {    
+    let url = "http://localhost:8080/deal";    
     
-    let url = "http://localhost:8080/deal";
+    var updateData = new FormData();
+
+    deal.score = deal.score + 1;
+    deal.voted=this.token.getUsername();   
+    
+    
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);
   
 
 
    
-    deal.score = deal.score + 1;
-    deal.voted=this.token.getUsername();   
-    deal.voteType="UP";
+   
    
 
-    this.http.put(url, deal).subscribe(
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },
@@ -69,12 +76,16 @@ export class DealListComponent implements OnInit {
   }
   minusScore(deal) {
     let url = "http://localhost:8080/deal";
+    var updateData = new FormData();
     
     
-    deal.voteType="DOWN";
     deal.score = deal.score - 1;
     deal.voted=this.token.getUsername();    
-    this.http.put(url, deal).subscribe(
+    updateData.append('id', deal.dealID);
+    updateData.append('score', deal.score);
+    updateData.append('voted', deal.voted);
+    
+    this.http.put(url, updateData).subscribe(
       res => {
 
       },
@@ -86,5 +97,8 @@ export class DealListComponent implements OnInit {
     
   }
 
-
+  edit(deal){
+    window.location.href="/edit/"+deal.dealID;
+  
+  }
 }

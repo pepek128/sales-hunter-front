@@ -3,7 +3,11 @@
         <mat-card-title>        
            
             <a href="/deals/{{deal.dealID}}">{{deal.name}}</a>
-        
+            <br />
+            <button *ngIf='isLoggedIn && deal.userDTO.username === name' (click)="edit(deal)" mat-button mat-button color="warn">
+                <mat-icon class="edit">create icon</mat-icon>
+    
+            </button> 
         </mat-card-title>
 
         <img *ngIf="deal.image" mat-card-image src="assets/images/{{deal.image}}">
@@ -34,8 +38,10 @@
             
             </div>
             <br />
-           Autor: {{deal.user.username}}           
+           Autor: {{deal.userDTO.username}}        
+         
         </mat-card-footer>
+      
 
     </mat-card>
 

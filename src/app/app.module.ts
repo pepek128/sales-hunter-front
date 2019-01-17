@@ -39,13 +39,16 @@ import { NameResultsComponent } from './name-results/name-results.component';
 import { CatResultsComponent } from './cat-results/cat-results.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { VoteStatsService } from './vote-stats.service';
+import { DealEditComponent } from './deal-edit/deal-edit.component';
 
 
-
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 
 @NgModule({
@@ -78,6 +81,7 @@ import { VoteStatsService } from './vote-stats.service';
     CatResultsComponent,
     LoginComponent,
     RegisterComponent,
+    DealEditComponent,
    
     
    
@@ -108,7 +112,14 @@ import { VoteStatsService } from './vote-stats.service';
     MatSelectModule,      
     MatOptionModule,      
     MatSlideToggleModule, LayoutModule, MatSidenavModule, MatListModule, 
-    FlexLayoutModule   
+    FlexLayoutModule ,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['example.com'],
+        blacklistedRoutes: ['example.com/examplebadroute/']
+      }
+    }) 
   ],
   providers: [DealService,CategoryService,httpInterceptorProviders,LoginComponent,VoteStatsService],
   bootstrap: [AppComponent]
