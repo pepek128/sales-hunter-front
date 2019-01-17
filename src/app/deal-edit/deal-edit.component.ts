@@ -70,18 +70,9 @@ export class DealEditComponent implements OnInit {
   updateDeal(deal): void {
 
     let url1 = "http://localhost:8080/edit";
-    let imgl = 'http://localhost:8080/uploadfile';
-    let clean = 'http://localhost:8080/cleanup';
-    let filename;
-    let oldfilename;
-    var uploadData = new FormData();
-    var cleanData = new FormData();
-    oldfilename = deal.image;
-    uploadData.append('file', this.file);
-    cleanData.append('oldfilename', oldfilename);
-    cleanData.append('author', this.author);
-    cleanData.append('id', deal.dealID);
-
+    let imgl = 'http://localhost:8080/uploadfile';    
+    var uploadData = new FormData();    
+    uploadData.append('file', this.file);  
     deal.name = this.model.get("name").value;
     deal.description = this.model.get("description").value;
     deal.link = this.model.get("link").value;
@@ -137,7 +128,7 @@ export class DealEditComponent implements OnInit {
 
   }
   delete() {
-    alert("usuwam" + this.id);
+    
     this.http.delete('http://localhost:8080/delete/' + this.id).subscribe(
       res => {
         window.location.href = "/";

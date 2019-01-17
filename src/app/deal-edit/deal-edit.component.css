@@ -24,7 +24,7 @@ mat-card {
 }    
 mat-card img{
   object-fit: cover; 
-  width: 40%; 
+  width: 30%; 
   height: auto;
   max-height: 50%;
   display: block;
